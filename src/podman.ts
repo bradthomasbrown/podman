@@ -199,7 +199,7 @@ class Podman {
 	}
 
     static remove(id:string) {
-        const _90_ = Bun.spawn(["podman", "remove", id]);
+        const _90_ = Bun.spawn(["podman", "rm", id]);
         return _90_.exited;
     }
 
