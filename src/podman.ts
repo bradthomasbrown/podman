@@ -151,6 +151,17 @@ type RunOptions =
     | ["volumes-from", string]
     | ["workdir", string];
 
+type RemoveOptions =
+      ["all"]
+    | ["cidfile"]
+    | ["depend"]
+    | ["filter", string]
+    | ["force"]
+    | ["ignore"]
+    | ["latest"]
+    | ["time", number]
+    | ["volumes"];
+
 const _c946a1_ = new TextDecoder();
 
 // read a readable stream to its end, as text, return full string
@@ -181,11 +192,9 @@ class Podman {
 
 	static run(options:Array<RunOptions>, image:string, command:null|string) {
 		const _ec_ = ["podman", "run"];
-		if (options) {
-            for (const option of options) {
-                if (option.length == 1) _ec_.push(`--${option[0]}`);
-                else _ec_.push(`--${option[0]}=${String(option[1])}`);
-            }
+        for (const option of options) {
+            if (option.length == 1) _ec_.push(`--${option[0]}`);
+            else _ec_.push(`--${option[0]}=${String(option[1])}`);
         }
 		_ec_.push(image);
         if (command) _ec_.push(command);
@@ -198,7 +207,12 @@ class Podman {
 		return _b2c4_.exited;
 	}
 
-    static remove(id:string) {
+    static remove(options:Array<RemoveOptions>, id:string) {
+        const _18_ = ["podman", "rm"];
+        for (const option of options) {
+            if (option.length == 1) _18_.push(`--${option[0]}`);
+            else _18_.push(`--${option[0]}=${String(option[1])}`);
+        }
         const _90_ = Bun.spawn(["podman", "rm", id]);
         return _90_.exited;
     }
