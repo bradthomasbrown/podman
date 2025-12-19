@@ -213,7 +213,7 @@ class Podman {
             if (option.length == 1) _18_.push(`--${option[0]}`);
             else _18_.push(`--${option[0]}=${String(option[1])}`);
         }
-        const _90_ = Bun.spawn(["podman", "rm", id]);
+        const _90_ = Bun.spawn(_18_);
         return _90_.exited;
     }
 
