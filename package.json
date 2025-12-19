@@ -1,0 +1,16 @@
+{
+    "name": "@bradthomasbrown/podman",
+    "description": "Minimal, unoptimized, and unaudited `podman` library for Bun and JavaScript/TypeScript.",
+    "version": "1.0.0",
+    "author": "Brad Brown <https://t.me/bradthomasbrown>",
+    "type": "module",
+    "files": [
+        "dist/"
+    ],
+    "exports": {
+        ".": "./dist/podman.js"
+    },
+    "devDependencies": {
+        "@types/bun": "^1.3.5"
+    }
+}
