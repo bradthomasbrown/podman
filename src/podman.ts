@@ -190,13 +190,18 @@ class Podman {
 		_ec_.push(image);
         if (command) _ec_.push(command);
 		const _100b_ = Bun.spawn(_ec_);
-		return _ec5174_(_100b_.stdout);
+		return _ec5174_(_100b_.stdout).then(a => a.trim());
 	}
 
 	static kill(id:string) {
 		const _b2c4_ = Bun.spawn(["podman", "kill", id]);
 		return _b2c4_.exited;
 	}
+
+    static remove(id:string) {
+        const _90_ = Bun.spawn(["podman", "remove", id]);
+        return _90_.exited;
+    }
 
 }
 
