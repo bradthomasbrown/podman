@@ -190,16 +190,17 @@ class Podman {
 		return _ec5174_(_ef27_.stdout).then(JSON.parse);
 	}
 
-	static run(options:Array<RunOptions>, image:string, command:null|string) {
+	static async run(options:Array<RunOptions>, image:string, command:null|string|Array<string>) {
 		const _ec_ = ["podman", "run"];
         for (const option of options) {
             if (option.length == 1) _ec_.push(`--${option[0]}`);
             else _ec_.push(`--${option[0]}=${String(option[1])}`);
         }
 		_ec_.push(image);
-        if (command) _ec_.push(command);
+        if (command instanceof Array) _ec_.push(...command);
+        else if (command !== null) _ec_.push(command);
 		const _100b_ = Bun.spawn(_ec_);
-		return _ec5174_(_100b_.stdout).then(a => a.trim());
+		return await _ec5174_(_100b_.stdout).then(a => a.trim());
 	}
 
 	static kill(id:string) {
