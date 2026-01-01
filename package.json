@@ -11,6 +11,7 @@
         ".": "./dist/podman.js"
     },
     "devDependencies": {
+        "@bradthomasbrown/jra": "^1.0.4",
         "@types/bun": "^1.3.5"
     }
 }
